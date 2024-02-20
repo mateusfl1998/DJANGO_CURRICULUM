@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        {% if not user.is_authenticated%}
+        <li><a href="{% url 'register_new_user' %}">Registrar</a></li>
+        {%endif%}
+        {%if user.is_authenticated%}
+        <li>Olá {% user.name%}</li>
+        {%endif%}
+
+      <ul>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2023 PycodeBR Multimarcas</p>
+  </footer>
+</body>
+</html>
